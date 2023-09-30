@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/style.css"],
+  "sourcesContent": ["h1 {\r\n    color:blue;\r\n}\r\n\r\n.red {\r\n    background-color: red;\r\n}\r\n.lime {\r\n    background-color: lime;\r\n}"],
+  "mappings": ";AAAA;AACI,SAAM;AACV;AAEA,CAAC;AACG,oBAAkB;AACtB;AACA,CAAC;AACG,oBAAkB;AACtB;",
+  "names": []
+}
