@@ -1,10 +1,14 @@
 
-import { counterSlice as slice2 } from "./toogle_start_false"
-import { counterSlice as slice1 } from "./set_value"
+
+import { boolSlice } from "./toogle_start_false.js"
+
+import { colorSlice } from "./set_value.js"
+
 import { configureStore } from '@reduxjs/toolkit'
+
 export const store = configureStore({
     reducer: {
-      counter : slice1.reducer,
-      counter2 : slice2.reducer
+      color : colorSlice.reducer,
+      bool : boolSlice.reducer
     },
 });

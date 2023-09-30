@@ -5,8 +5,8 @@ const initialState = {
     value: false,
 }
   
-export const counterSlice = createSlice({
-    name: 'counter2',
+export const boolSlice = createSlice({
+    name: 'bool',
     initialState,
     reducers: {
         toogle: (state) => {
@@ -16,4 +16,6 @@ export const counterSlice = createSlice({
 })
 
 
-export const { toogle } = counterSlice.actions
+export const { toogle } = boolSlice.actions
+
+

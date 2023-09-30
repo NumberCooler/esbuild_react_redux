@@ -1084,7 +1084,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState2(initialState3) {
+          function useState(initialState3) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState3);
           }
@@ -1886,7 +1886,7 @@
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
           exports.useRef = useRef4;
-          exports.useState = useState2;
+          exports.useState = useState;
           exports.useSyncExternalStore = useSyncExternalStore3;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -3752,7 +3752,7 @@
             if (node.hasOwnProperty(valueField) || typeof descriptor === "undefined" || typeof descriptor.get !== "function" || typeof descriptor.set !== "function") {
               return;
             }
-            var get2 = descriptor.get, set3 = descriptor.set;
+            var get2 = descriptor.get, set2 = descriptor.set;
             Object.defineProperty(node, valueField, {
               configurable: true,
               get: function() {
@@ -3763,7 +3763,7 @@
                   checkFormFieldValueStringCoercion(value);
                 }
                 currentValue = "" + value;
-                set3.call(this, value);
+                set2.call(this, value);
               }
             });
             Object.defineProperty(node, valueField, {
@@ -5674,7 +5674,7 @@
           function has(key) {
             return key._reactInternals !== void 0;
           }
-          function set2(key, value) {
+          function set(key, value) {
             key._reactInternals = value;
           }
           var NoFlags = (
@@ -6807,14 +6807,14 @@
           function includesSomeLane(a2, b2) {
             return (a2 & b2) !== NoLanes;
           }
-          function isSubsetOfLanes(set3, subset) {
-            return (set3 & subset) === subset;
+          function isSubsetOfLanes(set2, subset) {
+            return (set2 & subset) === subset;
           }
           function mergeLanes(a2, b2) {
             return a2 | b2;
           }
-          function removeLanes(set3, subset) {
-            return set3 & ~subset;
+          function removeLanes(set2, subset) {
+            return set2 & ~subset;
           }
           function intersectLanes(a2, b2) {
             return a2 & b2;
@@ -11593,9 +11593,9 @@
               }
               return maybeStrictRoot;
             };
-            var setToSortedString = function(set3) {
+            var setToSortedString = function(set2) {
               var array = [];
-              set3.forEach(function(value) {
+              set2.forEach(function(value) {
                 array.push(value);
               });
               return array.sort().join(", ");
@@ -12679,7 +12679,7 @@
           function adoptClassInstance(workInProgress2, instance) {
             instance.updater = classComponentUpdater;
             workInProgress2.stateNode = instance;
-            set2(instance, workInProgress2);
+            set(instance, workInProgress2);
             {
               instance._reactInternalInstance = fakeInternalInstance;
             }
@@ -23548,7 +23548,7 @@
             return x2 === y2 && (x2 !== 0 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
           }
           var objectIs = typeof Object.is === "function" ? Object.is : is;
-          var useState2 = React6.useState, useEffect2 = React6.useEffect, useLayoutEffect2 = React6.useLayoutEffect, useDebugValue2 = React6.useDebugValue;
+          var useState = React6.useState, useEffect2 = React6.useEffect, useLayoutEffect2 = React6.useLayoutEffect, useDebugValue2 = React6.useDebugValue;
           var didWarnOld18Alpha = false;
           var didWarnUncachedGetSnapshot = false;
           function useSyncExternalStore3(subscribe, getSnapshot, getServerSnapshot) {
@@ -23570,7 +23570,7 @@
                 }
               }
             }
-            var _useState = useState2({
+            var _useState = useState({
               inst: {
                 value,
                 getSnapshot
@@ -26310,8 +26310,8 @@
   var initialState = {
     value: false
   };
-  var counterSlice = createSlice({
-    name: "counter2",
+  var boolSlice = createSlice({
+    name: "bool",
     initialState,
     reducers: {
       toogle: (state) => {
@@ -26319,17 +26319,17 @@
       }
     }
   });
-  var { toogle } = counterSlice.actions;
+  var { toogle } = boolSlice.actions;
 
   // src/set_value.js
   var initialState2 = {
     value: null
   };
-  var counterSlice2 = createSlice({
-    name: "counter",
+  var colorSlice = createSlice({
+    name: "color",
     initialState: initialState2,
     reducers: {
-      set: (state, action) => {
+      set1: (state, action) => {
         setTimeout(() => {
           store.dispatch(toogle());
         }, 0);
@@ -26338,13 +26338,13 @@
       }
     }
   });
-  var { set } = counterSlice2.actions;
+  var { set1 } = colorSlice.actions;
 
   // src/store.js
   var store = configureStore({
     reducer: {
-      counter: counterSlice2.reducer,
-      counter2: counterSlice.reducer
+      color: colorSlice.reducer,
+      bool: boolSlice.reducer
     }
   });
 
@@ -26682,29 +26682,21 @@
 
   // src/app.jsx
   var Switch = () => {
-    const state1 = useSelector((state2) => state2.counter2.value);
+    const state1 = useSelector((state) => state.bool.value);
     const dispatch = useDispatch();
-    let [state, setState] = React5.useState({ value: false });
     let switch_onClick = () => dispatch(toogle());
-    let switch_click = () => {
-      if (state.value == false) {
-        setState({ value: true });
-      } else if (state.value == true) {
-        setState({ value: false });
-      }
-    };
     return /* @__PURE__ */ React5.createElement("div", { style: { border: "solid 1px #000", display: "flex", width: "200px", height: "50px" }, onClick: switch_onClick }, /* @__PURE__ */ React5.createElement("div", { style: { flex: 1 } }), /* @__PURE__ */ React5.createElement("div", { style: { flex: 1 }, className: state1 == true ? "lime" : "red" }));
   };
   var ConfigColor = () => {
     const dispatch = useDispatch();
     let ref1 = React5.useRef();
     let color_onChange = (e) => {
-      dispatch(set(ref1.current.value));
+      dispatch(set1(ref1.current.value));
     };
     return /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("input", { ref: ref1, type: "color", onChange: color_onChange }));
   };
   var ShowColor = () => {
-    const state1 = useSelector((state) => state.counter.value);
+    const state1 = useSelector((state) => state.color.value);
     return /* @__PURE__ */ React5.createElement("div", null, state1);
   };
   var Greet = () => {

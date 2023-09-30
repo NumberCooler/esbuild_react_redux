@@ -1,20 +1,16 @@
-
-
 import { createSlice } from '@reduxjs/toolkit'
 
 import { store } from './store';
 import { toogle } from './toogle_start_false'
 
-
 const initialState = {
     value: null,
 }
-  
-export const counterSlice = createSlice({
-    name: 'counter',
+export const colorSlice = createSlice({
+    name: 'color',
     initialState,
     reducers: {
-        set: (state,action) => {
+        set1: (state,action) => {
             setTimeout(()=>{
                 store.dispatch(toogle());
             },0);
@@ -24,4 +20,6 @@ export const counterSlice = createSlice({
     },
 })
 
-export const { set } = counterSlice.actions
+export const { set1 } = colorSlice.actions
+
+
